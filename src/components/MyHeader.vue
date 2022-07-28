@@ -5,7 +5,7 @@
       @keyup.enter="searchKeyword"
       type="text"
       class="form-control rounded"
-      placeholder="Cerca il tuo film"
+      placeholder="Cerca il tuo film o serietv"
       aria-label="Search"
     />
     <button @click="searchKeyword" class="btn">Cerca</button>

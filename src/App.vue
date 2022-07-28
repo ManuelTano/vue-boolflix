@@ -19,9 +19,10 @@ export default {
   },
   data() {
     return {
-      movies: [], 
-      languages: [], 
-      api_key: "1f5bacfe2502b312d524db09dc4b7175", 
+      movies: [],
+      series: [],
+      languages: ["it", "en"],
+      api_key: "1f5bacfe2502b312d524db09dc4b7175",
     };
   },
   methods: {
@@ -37,8 +38,21 @@ export default {
         });
     },
 
+    searchSeries(query) {
+      const params = {
+        query: query,
+        api_key: this.api_key,
+      };
+      return axios
+        .get(`https://api.themoviedb.org/3/search/tv`, { params })
+        .then((response) => {
+          this.series = response.data.results;
+        });
+    },
+
     Search(query) {
       this.searchMovies(query);
+      this.searchSeries(query);
     },
   },
 };

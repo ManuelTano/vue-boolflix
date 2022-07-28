@@ -7,7 +7,14 @@
       :type="'movie'"
       :languages="languages"
     />
+
+    <MySearch
+      v-for="serie in series"
+      :key="serie.id"
+      :info="serie"
+      :type="'serie'" />
   </div>
+
 </template>
 
 <script>
@@ -19,7 +26,7 @@ export default {
     MySearch,
   },
   props: {
-    movies: Array, 
+    movies: Array,
     series: Array,
     languages: Array,
   },

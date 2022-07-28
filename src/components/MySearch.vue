@@ -4,15 +4,21 @@
     <ul>
       <li>
         <strong
-          >Titolo: {{info.title }}
+          >Titolo: {{ type === "movie" ? info.title : info.name }}
         </strong>
       </li>
       <li>
         <strong>Titolo originale: </strong>
-        {{ info.original_title}}
+        {{ type === "movie" ? info.original_title : info.original_name }}
       </li>
       <li>
-        <strong>Lingua: {{ info.original_language }}</strong>
+        <strong>Lingua:</strong>
+        <img
+          v-if="languages.includes(info.original_language)"
+          :src="`./flags/${info.original_language}.png`"
+          alt="flags"
+        />
+        <span class="text-uppercase" v-else> {{ info.original_language }}</span>
       </li>
       <li>
         <strong>Voto:{{ info.vote_average }}</strong>
@@ -27,9 +33,17 @@ export default {
   props: {
     info: Object,
     type: String,
+    languages: Array,
   },
 };
 </script>
 
 <style scoped lang="scss">
+
+img {
+    margin-left: 5px;
+    width: 20px;
+    height: 10px;
+}
+
 </style> 
