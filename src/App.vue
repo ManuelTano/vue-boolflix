@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <MyHeader />
-    <MyMain />
+    <MyHeader @searching="Search" />
+    <MyMain :movies="movies" :series="series" :languages="languages" />
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import MyHeader from "./components/MyHeader.vue";
 import MyMain from "./components/MyMain.vue";
 import "./assets/sass/style.scss";
@@ -15,6 +16,30 @@ export default {
   components: {
     MyHeader,
     MyMain,
+  },
+  data() {
+    return {
+      movies: [], 
+      languages: [], 
+      api_key: "1f5bacfe2502b312d524db09dc4b7175", 
+    };
+  },
+  methods: {
+    searchMovies(query) {
+      const params = {
+        query: query,
+        api_key: this.api_key,
+      };
+      return axios
+        .get(`https://api.themoviedb.org/3/search/movie`, { params })
+        .then((response) => {
+          this.movies = response.data.results;
+        });
+    },
+
+    Search(query) {
+      this.searchMovies(query);
+    },
   },
 };
 </script>
