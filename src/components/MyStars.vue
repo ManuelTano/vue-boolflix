@@ -1,6 +1,7 @@
 <template>
   <div>
-    <strong>Voto:</strong>
+    Voto: 
+    <i v-for="star in starsCalc" :key="star" class="fas fa-star ms-1"></i>
   </div>
 </template>
 
@@ -11,6 +12,18 @@ export default {
   props: {
     vote: Number,
   },
-  
+  computed: {
+    starsCalc() {
+      return Math.ceil(this.vote / 2);
+    },
+  },
 };
 </script> 
+
+<style scoped>
+.fas {
+    color: gold;
+}
+
+
+</style>

@@ -4,11 +4,11 @@
       v-model="keyword"
       @keyup.enter="searchKeyword"
       type="text"
-      class="form-control rounded"
+      class="form-control rounded mt-2 "
       placeholder="Cerca il tuo film o serietv"
       aria-label="Search"
     />
-    <button @click="searchKeyword" class="btn">Cerca</button>
+    <button @click="searchKeyword" class="btn btn-light mt-2 mb-5" >Cerca</button>
   </header>
 </template>
 

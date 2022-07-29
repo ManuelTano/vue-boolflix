@@ -59,4 +59,10 @@ export default {
 </script>
 
 <style lang="scss">
+
+body{
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100vw;
+}
 </style>
