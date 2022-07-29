@@ -3,6 +3,12 @@
   <div class="hello">
     <ul>
       <li>
+        <img
+          id="copertina"
+          :src="`http://image.tmdb.org/t/p/w342/${info.poster_path}`"
+        />
+      </li>
+      <li>
         <strong
           >Titolo: {{ type === "movie" ? info.title : info.name }}
         </strong>
@@ -15,7 +21,7 @@
         <strong>Lingua:</strong>
         <img
           v-if="languages.includes(info.original_language)"
-          :src="`./flags/${info.original_language}.png`"
+          :src="`/flags/${info.original_language}.png `"
           alt="flags"
         />
         <span class="text-uppercase" v-else> {{ info.original_language }}</span>
@@ -39,11 +45,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 img {
-    margin-left: 5px;
-    width: 20px;
-    height: 10px;
+  margin-left: 5px;
+  width: 20px;
+  height: 10px;
 }
 
+#copertina {
+    width: 200px;
+    height: 300px;
+}
 </style> 
