@@ -27,15 +27,20 @@
         <span class="text-uppercase" v-else> {{ info.original_language }}</span>
       </li>
       <li>
-        <strong>Voto:{{ info.vote_average }}</strong>
+        <strong><MyStars :vote="info.vote_average"/></strong>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import MyStars from "./MyStars.vue";
+
 export default {
   name: "MySearch",
+  components: {
+    MyStars,
+  },
   props: {
     info: Object,
     type: String,
@@ -52,7 +57,7 @@ img {
 }
 
 #copertina {
-    width: 200px;
-    height: 300px;
+  width: 200px;
+  height: 300px;
 }
 </style> 
