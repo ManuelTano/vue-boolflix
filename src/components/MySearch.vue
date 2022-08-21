@@ -1,35 +1,56 @@
-@@ -0,0 +1,21 @@
+
 <template>
-  <div class="hello">
-    <ul>
-      <li>
+  <div class="d-flex justify-content-center">
+    <div class="cards h-100 border-0">
+      <figure class="m-0">
         <img
-          id="copertina"
+          class="copertina"
+          v-if="info.poster_path === null"
+          src="/Copertina-non-disponibile.jpg"
+          alt="posterNotAvaible"
+        />
+        <img
+          class="copertina"
+          v-else
           :src="`http://image.tmdb.org/t/p/w342/${info.poster_path}`"
         />
-      </li>
-      <li>
-        <strong
-          >Titolo: {{ type === "movie" ? info.title : info.name }}
-        </strong>
-      </li>
-      <li>
-        <strong>Titolo originale: </strong>
-        {{ type === "movie" ? info.original_title : info.original_name }}
-      </li>
-      <li>
-        <strong>Lingua:</strong>
-        <img
-          v-if="languages.includes(info.original_language)"
-          :src="`/flags/${info.original_language}.png `"
-          alt="flags"
-        />
-        <span class="text-uppercase" v-else> {{ info.original_language }}</span>
-      </li>
-      <li>
-        <strong><MyStars :vote="info.vote_average"/></strong>
-      </li>
-    </ul>
+      </figure>
+
+      <div id="retroCard">
+        <ul class="show">
+          <li class="mt-4">
+            <strong
+              >Titolo: {{ type === "movie" ? info.title : info.name }}
+            </strong>
+          </li>
+          <li>
+            <strong>Titolo originale: </strong>
+            {{ type === "movie" ? info.original_title : info.original_name }}
+          </li>
+          <li>
+            <strong>Lingue: </strong>
+
+            <img
+              v-if="languages.includes(info.original_language)"
+              :src="require(`../assets/flags/${info.original_language}.png`)"
+              alt="flags"
+              class="flags"
+            />
+            <span class="text-uppercase" v-else>
+              {{ info.original_language }}</span
+            >
+          </li>
+          <li>
+            <strong><MyStars :vote="info.vote_average" /></strong>
+          </li>
+          <li>
+            <div class="description">
+              <strong>Overview:</strong> {{ info.overview }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -50,15 +71,48 @@ export default {
 </script>
 
 <style scoped lang="scss">
-img {
-  margin-left: 5px;
+@import "@/assets/sass/style.scss";
+
+.m-bcol {
+  margin-bottom: 50px;
+}
+
+.cards {
+  background-color: $bg-color-black;
+  height: 500px;
+  width: 342px;
+
+  .copertina {
+    width: 342px;
+    height: 500px;
+  }
+
+  &:hover {
+    width: 342px;
+  }
+}
+
+.cards:hover .copertina {
+  display: none;
+}
+
+.show {
+  color: $primary-color;
+  display: none;
+}
+.cards:hover .show {
+  display: block;
+}
+
+.flags {
   width: 20px;
-  height: 10px;
+}
+ul {
+  list-style-type: none;
 }
 
-#copertina {
-  width: 200px;
-  height: 300px;
+.description {
+  max-height: 350px;
+  overflow-y: auto;
 }
-
 </style> 
