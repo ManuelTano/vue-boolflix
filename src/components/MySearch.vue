@@ -1,23 +1,23 @@
 
 <template>
-  <div class="d-flex justify-content-center">
-    <div class="cards h-100 border-0">
+  <div class="row">
+    <div class="cards h-100 border-0 mb-5 mx-4">
       <figure class="m-0">
         <img
-          class="copertina"
+          class="cover"
           v-if="info.poster_path === null"
           src="/Copertina-non-disponibile.jpg"
-          alt="posterNotAvaible"
+          alt="Covernotavailable"
         />
         <img
-          class="copertina"
+          class="cover"
           v-else
           :src="`http://image.tmdb.org/t/p/w342/${info.poster_path}`"
         />
       </figure>
 
-      <div id="retroCard">
-        <ul class="show">
+      <div id="retroCard ">
+        <ul class="show ">
           <li class="mt-4">
             <strong
               >Titolo: {{ type === "movie" ? info.title : info.name }}
@@ -43,6 +43,10 @@
           <li>
             <strong><MyStars :vote="info.vote_average" /></strong>
           </li>
+              <li>
+            <span class="fw-bold">Cast:</span>
+            <span v-for="actor in cast" :key="actor.id"> {{ actor.name }}</span>
+          </li>
           <li>
             <div class="description">
               <strong>Trama:</strong> {{ info.overview }}
@@ -56,17 +60,42 @@
 
 <script>
 import MyStars from "./MyStars.vue";
+import axios from "axios";
 
 export default {
   name: "MySearch",
   components: {
     MyStars,
   },
+  data() {
+    return {
+      cast: [],
+    };
+  },
   props: {
     info: Object,
     type: String,
     languages: Array,
   },
+  
+  methods: {
+    getCast() {
+      const type = this.info.title === "movie" ? "movie" : "tv";
+      axios
+        .get(
+          `https://api.themoviedb.org/3/${type}/${this.info.id}/credits?api_key=1f5bacfe2502b312d524db09dc4b7175`
+        )
+        .then((results) => {
+          const cast = results.data.cast;
+          console.log(cast);
+          cast.splice(5);
+          this.cast = cast;
+        });
+    },
+  },
+  mounted() {
+    this.getCast();
+}
 };
 </script>
 
@@ -76,20 +105,21 @@ export default {
 
 .cards {
   background-color: $bg-color-black;
-  height: 500px;
+  max-height: 500px;
   width: 342px;
 
-  .copertina {
+  .cover {
     width: 342px;
     height: 500px;
   }
 
   &:hover {
     width: 342px;
+    height: 500px;
   }
 }
 
-.cards:hover .copertina {
+.cards:hover .cover {
   display: none;
 }
 
@@ -106,10 +136,16 @@ export default {
 }
 ul {
   list-style-type: none;
+  padding: 0;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .description {
-  max-height: 350px;
+  max-height: 320px;
   overflow-y: auto;
 }
+
+
+
 </style> 

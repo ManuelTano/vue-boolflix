@@ -1,31 +1,30 @@
 <template>
   <main>
+    <div class="padd">
+      <h2 class="mb-5 text-center">FILM</h2>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <MySearch
+        v-for="movie in movies"
+        :key="movie.id"
+        :info="movie"
+        :type="'movie'"
+        :languages="languages"
+      />
+    </div>
 
-      <div class="padd">
-        <h2 class="mb-4">FILM</h2>
-      </div>
-      <div class="d-flex">
-        <MySearch
-          v-for="movie in movies"
-          :key="movie.id"
-          :info="movie"
-          :type="'movie'"
-          :languages="languages"
-        />
-      </div>
-
-      <div>
-        <h2 class="my-4">SERIE TV</h2>
-      </div>
-      <div class="d-flex">
-        <MySearch
-          v-for="serie in series"
-          :key="serie.id"
-          :info="serie"
-          :type="'serie'"
-          :languages="languages"
-        />
-      </div>
+    <div>
+      <h2 class="my-5 text-center">SERIE TV</h2>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <MySearch
+        v-for="serie in series"
+        :key="serie.id"
+        :info="serie"
+        :type="'serie'"
+        :languages="languages"
+      />
+    </div>
   </main>
 </template>
 
@@ -50,7 +49,10 @@ export default {
   padding-top: 120px;
 }
 
-h2{
+h2 {
   margin-left: 35px;
+  color: white;
+  font-weight: bold;
 }
+
 </style> 

@@ -63,5 +63,6 @@ export default {
 body{
   margin: 0 auto;
   box-sizing: border-box;
+  background-color:#141414;
 }
 </style>
