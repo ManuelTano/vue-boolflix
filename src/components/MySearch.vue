@@ -28,7 +28,7 @@
             {{ type === "movie" ? info.original_title : info.original_name }}
           </li>
           <li>
-            <strong>Lingue: </strong>
+            <strong>Lingua: </strong>
 
             <img
               v-if="languages.includes(info.original_language)"
@@ -45,7 +45,7 @@
           </li>
           <li>
             <div class="description">
-              <strong>Overview:</strong> {{ info.overview }}
+              <strong>Trama:</strong> {{ info.overview }}
             </div>
           </li>
         </ul>
@@ -73,9 +73,6 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
 
-.m-bcol {
-  margin-bottom: 50px;
-}
 
 .cards {
   background-color: $bg-color-black;

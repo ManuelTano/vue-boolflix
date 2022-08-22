@@ -1,7 +1,7 @@
 <template>
   <div>
     Voto: 
-    <i v-for="star in starsCalc" :key="star" class="fas fa-star ms-1"></i>
+    <i v-for="n in 5" :key="n" class="fa-star" :class="n <= starsCalc ? 'fa-solid' : 'fa-regular'"></i>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 </script> 
 
 <style scoped>
-.fas {
+.fa-star {
     color: gold;
 }
 
